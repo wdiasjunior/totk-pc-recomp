@@ -219,6 +219,10 @@ change passes these, all run with `.venv`:
 | `tests\excl_mt.py` | the exclusive monitor helpers under contention and ABA, on several threads | no |
 | `tests\jumptables_check.py` | `recomp/jumptables.py` against a Unicorn oracle; must report 0 disagreements, on 1.4.3 too | yes |
 
+The tests marked "no" need two Python modules besides the standard library: `capstone` and `unicorn` (Debian and
+Ubuntu: `python3-capstone`, `python3-unicorn`; elsewhere `pip install capstone unicorn`). The build image has both, so
+`.github/workflows/linux-host.yml` runs them.
+
 Runtime probes, each a mode of `totk.exe` (the list is at the top of `runtime/main.c`): `--probe-kernel`,
 `--probe-vkexec`, `--probe-nvn-tex` and `--probe-shader` cover most runtime changes. `--probe-shader` and the draw
 part of `--probe-vkexec` translate shaders of the census below: they look for `build/<ver>/shaders/jobs.json` of the
